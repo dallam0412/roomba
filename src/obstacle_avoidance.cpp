@@ -9,11 +9,11 @@ public:
   ObstacleAvoidance() : Node("ObstacleAvoidance") {
 
     auto default_qos = rclcpp::QoS(rclcpp::SystemDefaultsQoS());
-    subscription_ = this->create_subscription<(
+    subscription_ = this->create_subscription<sensor_msgs::msg::LaserScan>(
         "laser_scan", default_qos,
         std::bind(&ObstacleAvoidance::topic_callback, this, _1));
     publisher_ =
-        this->create_publisher("cmd_vel", 10);
+        this->create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 10);
   }
 
 private:
@@ -40,13 +40,13 @@ private:
     }
     return msg;
   }
-  rclcpp::Publisher::SharedPtr publisher_;
-  rclcpp::Subscription::SharedPtr subscription_;
+  rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr publisher_;
+  rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr subscription_;
 };
 
 int main(int argc, char *argv[]) {
   rclcpp::init(argc, argv);
-  rclcpp::spin(std::make_shared());
+  rclcpp::spin(std::make_shared<ObstacleAvoidance>());
   rclcpp::shutdown();
   return 0;
 }

@@ -17,9 +17,13 @@ ament_target_dependencies(reading_laser rclcpp std_msgs sensor_msgs)
 add_executable(moving_robot src/moving_robot.cpp)
 ament_target_dependencies(moving_robot rclcpp geometry_msgs)
 
+add_executable(obstacle_avoidance src/obstacle_avoidance.cpp)
+ament_target_dependencies(obstacle_avoidance rclcpp sensor_msgs geometry_msgs)
+
 install(TARGETS
   moving_robot
   reading_laser
+  obstacle_avoidance
   DESTINATION lib/${PROJECT_NAME}/
 )
 
