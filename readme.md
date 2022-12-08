@@ -48,6 +48,9 @@ ros2 launch roomba dolly.launch.py
 ```
 now place an obstacle in front of the roomba and we can see it avoid
 
+# output
+https://drive.google.com/drive/folders/1ZkO5zfQP9FS1C7dPJLvIly0TorYvum-y?usp=sharing
+
 # dependencies
 * dolly package
 * ros2 galactic
