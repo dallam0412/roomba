@@ -9,9 +9,20 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
 
 add_executable(reading_laser src/reading_laser.cpp)
 ament_target_dependencies(reading_laser rclcpp std_msgs sensor_msgs)
+
+add_executable(moving_robot src/moving_robot.cpp)
+ament_target_dependencies(moving_robot rclcpp geometry_msgs)
+
+install(TARGETS
+  moving_robot
+  reading_laser
+  DESTINATION lib/${PROJECT_NAME}/
+)
+
 
 install(TARGETS
   reading_laser
